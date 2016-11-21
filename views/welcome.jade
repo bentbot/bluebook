@@ -1,0 +1,50 @@
+include body.jade
+include header.jade
+main.wrap
+	div.welcome.span8
+		h1 Welcome to 
+			a( href="/" ) BlueBook
+		p 
+
+	div.signup.span4
+		h2
+			i.fa.fa-globe
+			span Create an Account
+		form( action="/api/signup" method="post" class="newusers" )
+
+			label( for="firstname" )  First Name
+			input(
+				class="firstname"
+				name="firstname"
+				alt="First Name Input"
+				title="First Name"
+			)
+
+			label( for="lastname" ) Last Name
+			input(
+				class="lastname"
+				name="lastname"
+				alt="Last Name Input"
+				title="Last Name"
+			)
+
+			label( for="email" ) Email
+			input(
+				class="email"
+				name="email"
+				type="email"
+				alt="Primary E-Mail Address"
+				title="Email"
+			)
+			
+			label( for="password" )  Password
+			input(
+				class="password"
+				name="password"
+				type="password"
+				alt="Your Account Password Input"
+				title="Password"
+			)
+			
+			input( class="signup button" type="submit" value="Sign Up" )
+include footer.jade

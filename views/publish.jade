@@ -1,0 +1,19 @@
+.publish( ng-controller="publisher" )
+	.media
+		.type.status
+			i.fa.fa-pencil
+			span Status
+		.type.image
+			i.fa.fa-image
+			span Picture
+		.type.video
+			i.fa.fa-video-camera
+			span Video
+		.type.link
+			i.fa.fa-link
+			span Link
+	.post
+		if profile
+			img.profile( src="/images/profiles/#{profile.picture}")
+		textarea.new-post( placeholder="What's up?" )
+		.previews(ng)

@@ -1,0 +1,60 @@
+.welcome
+	@extend .box
+	background: #F9F9F9;
+	text-shadow: 0 1px #FFFFFF;
+	color: #424242;
+	h1
+		font-family sans-serif
+		font-size 28px
+		font-weight 400
+		margin 10px 0 15px 10px
+
+.login
+	input
+		@extend .large-input
+		transition: all 0.15s;
+		width: 30%;
+		margin: 1px 2%;
+		padding: 5px 10px;
+		font-size: 15px;
+		outline-color: #3f51b5;
+		border: 1px solid rgba(185,185,185,0.99);
+		box-shadow: 1px 1px 5px rgba(48,63,159,0.2);
+		border-radius: 1px;
+		&.error
+			border-color: #9C3131;
+	button
+		@extend .button
+		width: 15% !important;
+		padding: 5px 3px !important;
+		font-size: 15px !important;
+		border-color: rgba(186, 210, 255, 0.1) !important;
+		border-width: 2px;
+		margin: 1px 0 0 2% !important;
+	
+
+.notifications
+	.floater
+		@extend .floater
+
+.signup
+	@extend .box
+	padding 20px
+	h2
+		font-family sans-serif
+		font-size 20px
+		font-weight 600
+		margin 10px 0 20px 0
+		color: #525DA7
+		i
+			color: #3F51B5
+		span
+			margin: 0 10px
+	form
+		label
+			font-family sans-serif
+			font-size 15px
+			font-weight 600
+			color #565656
+		input
+			@extend .large-input

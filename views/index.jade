@@ -1,0 +1,16 @@
+include header.jade
+include body.jade
+main.col-12
+	.col-3
+		section
+			ul.sidebar
+				li
+					a( href="/u/#{profile.codename}" )
+						img.profile-picture.icon( src="/images/profiles/#{profile.picture}" )
+					a.item( href="/u/#{profile.codename}" ) #{profile.alias}
+	.articles.col-6
+		include publish.jade
+		include articles.jade
+	.col-3
+//include sidebar.jade
+include footer.jade

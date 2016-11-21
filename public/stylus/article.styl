@@ -1,0 +1,91 @@
+article
+	@extend .box
+	.author
+		position: relative
+		height: 50px;
+		.profile
+			margin-right: 5px;
+		.name
+			height: 23px;
+			font-family: fantasy;
+			font-size: 17px;
+		.meta
+			font-family: sans-serif
+			font-weight: 300
+			letter-spacing: 0.5px;
+			font-size: 12px;
+	.post
+		margin: 15px 0;
+	.actions
+		@extend .bar
+	.reactions
+		position: relative
+		span
+			margin: 0 2px;
+			&:first-child
+				margin-left: 0
+		i:last-child
+			margin-right: 0
+		&:hover .interactions
+			top: -75px !important;
+			opacity: 1;
+			display: block;
+		.interactions
+			position: absolute;
+			top: -70px;
+			width: 300px;
+			cursor: default
+			background: rgba(255,255,255,0.90);
+			border-radius: 100px;
+			border: 1px solid #E2E2E2;
+			box-shadow: 0px 1px 20px rgba(0,0,0,0.15);
+			z-index: 100;
+			left: -5px;
+			padding: 10px;
+			opacity: 0;
+			click-events: none;
+			transition: all 0.1s 0.1s ease-in-out;
+			div
+				border: none;
+				padding: 0;
+			.fa
+				cursor: pointer
+				font-size: 32px;
+				background-color: #708DCE;
+				padding: 9px;
+				color: white;
+				border-radius: 30px;
+				width: 32px;
+				height: 32px;
+				transition: all 0.3s;
+				&.fa-heart
+					background: #ffc0cb;
+					padding-top: 12px;
+					padding-bottom: 6px;
+				&:hover, &:active
+					&.fa-heart
+						background-color: #F44336;
+					&.fa-thumbs-up
+						background-color: #3C54EC;
+	.comment-author
+		font-family: sans-serif;
+	    font-size: 14px;
+	    font-weight: 600;
+	.comment-body 
+		margin: 5px 0;
+		font-family: sans-serif
+		font-size: 14px;
+		font-weight: 500;
+		float: left;
+	.comment-like 
+		float: right;
+		color: rgba(0,50,200,1)
+	&.error
+		text-align: center;
+		color: rgba(70, 56, 56, 0.5);
+		font-family: sans-serif;
+		font-weight: 200;
+.body
+	font-size: 15px;
+	font-family: sans-serif
+	font-weight: 500

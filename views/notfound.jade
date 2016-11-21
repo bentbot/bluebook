@@ -1,0 +1,9 @@
+include header.jade
+include body.jade
+main
+	article( id="404" ).error.404
+		if error
+			h1.
+				#{error.code}: #{error.notif}
+//include sidebar.jade
+include footer.jade

@@ -1,0 +1,56 @@
+script.
+	//console.log(!{JSON.stringify(posts)})
+if posts
+	.feed
+		each post in posts
+			article( id="#{post.id}" )
+				if post.author
+					.author
+						img.profile( src="/images/profiles/#{post.author.profile}")
+						a.name( href="/u/#{post.author.codename}" ) #{post.author.name}
+						if post.meta
+							.meta
+								.ameta #{post.author.meta}
+								.date( datetime='#{post.meta.date}' ) #{post.meta.date}
+				if post.body
+					.post
+						.content.body #{post.body}
+				.details 
+				.actions
+					.reactions( id="#{post.id}" )
+						if post.reactions.length > 0
+							each reaction, k in post.reactions
+								span( title="#{reaction.author} #{reaction.reaction}" time="#{ reaction.date }" data-conversation="#{ reaction.conversation }" )
+									span.author #{ reaction.author } 
+									span.reaction #{ reaction.reaction } 
+						else 
+							i( class="fa fa-thumbs-up" ) 
+							span Like
+							if post.reactions.kinds.length > 0
+								.interactions
+									each reaction, r in post.reactions.kinds
+										.action( title="#{ reaction.title }" data-type="#{ reaction.type }" )
+											i.fa( class="#{ reaction.icon }" )
+					.comments( id="#{post.id}" )
+						i.fa.fa-comment
+						if post.comments
+							span #{post.comments.count} Comments
+						else
+							span Comment
+					.share( id="#{post.id}" )
+						i.fa.fa-share
+						span Share
+				if post.comments
+					.comments
+						each comment in post.comments
+							.comment
+								.comment-author #{comment.author}
+								.comment-body #{comment.body}
+								.comment-like 
+									i.fa.fa-thumbs-up
+						.clear
+else 
+	article( id="404" ).error.404
+		if error
+			h1.
+				#{error.code}: #{error.message}

@@ -1,0 +1,28 @@
+include header.jade
+include body.jade
+main.col-12
+	.cover.wrap
+		if profile.cover
+			.cover-background( style="background-image: url('/images/covers/#{profile.cover}');")
+		if user
+			form.cover-form( action="/u/cover" method="POST" )
+				.hidden.progress-indicator
+				input.cover-uploader( type="file" )
+				.btn.upload-cover
+					.floater.hidden Update Background Image
+					i.fa.fa-pencil
+		h1.alias #{profile.alias}
+		.profile-picture
+			img( src="/images/profiles/#{profile.picture}" )
+		if !profile.friend
+			.btn.add-friend + Add Friend
+	.profile.wrap
+		.col-3
+			section
+				h2 Hello World!
+		.col-9.feed
+			if user
+				include publish.jade
+			include articles.jade
+//include sidebar.jade
+include footer.jade

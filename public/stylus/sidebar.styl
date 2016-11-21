@@ -1,0 +1,33 @@
+aside
+	min-width: 260px;
+	position: fixed;
+	top: 50px;
+	height: 100%;
+	background: #2B3888;
+	color: white;
+.sidebar
+	margin: 10px 10% 0 0;
+	padding: 0;
+	list-style: none;
+	height: 100%;
+	li
+		position: relative;
+		padding: 5px 10px;
+		text-align: left;
+		.item
+			position: absolute;
+			top: 14px;
+			font-family: sans-serif;
+			color: #2B2B2B;
+			text-decoration: none
+			&:hover, &:active
+				text-decoration: underline;
+	.profile-picture
+		width: 35px;
+		margin-right: 11px;
+		border: 1px solid #C2D0E0;
+		background: white;
+		border-radius: 2px;
+		box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	section
+		@extend .box

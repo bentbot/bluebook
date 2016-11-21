@@ -1,0 +1,145 @@
+.gray 
+	background: #EFEFEF !important;
+.white 
+	background: #FFFFFF !important;
+.header
+	background: #303F9F
+	color: white
+	height: 50px
+	width: 100%
+	.title 
+		float: left
+		width: 30px
+		height: 20px
+		text-align: center
+		font-family: sans-serif
+		font-weight: 700
+		font-size: 18px
+		border-radius: 2px
+		padding: 10px 5px
+		margin: 5px 0 0 5px
+		cursor: pointer
+		color: white;
+		text-decoration: none;
+		&:hover {
+			border: 2px solid #7986CB;
+			padding: 8px 3px
+		}
+	.search
+		display: none;
+		float: left;
+		width: 40%;
+		height: 35px;
+		margin: 6px 8px;
+		input
+			display: none
+			opacity: 0
+			height: 100%
+			width: 100%
+			outline: none
+			border-radius: 3px
+			border: 1px solid gray
+			background: #E8EAF6
+			padding: 0 10px
+			font-size: 16px
+	.notifications 
+		float: right
+		width: 50%
+		margin: 6px	
+		height: 35px	
+		text-align: right	
+		li
+			&.login
+				float: right;
+				width: auto;
+				font-size: 20px;
+				a
+					color: white;
+					text-decoration: none;
+					font-size: 15px;
+					font-family: sans-serif;
+					font-weight: bold;
+					text-shadow: 1px 1px #222D73;
+			position: relative;
+			list-style: none;
+			font-size: 23px;
+			margin: 0 5px;
+			padding: 9px 5px 7px 5px;
+			color: #0D155F
+			width: 30px;
+			height: 30px;
+			border-radius: 3px;
+			cursor: pointer
+			margin-bottom: 10px;
+			display: inline-block;
+			text-align: center
+			height: auto
+			&:hover 
+				color: #fff;
+			.bubble 
+				&.active
+					display: block;
+					z-index: 100;
+				display: none;
+				@extend .notif-box
+			.bubble-menu
+				width: 200px;
+				@extend .animate-closed
+				@extend .notif-box
+				&.active
+					@extend .animate-open
+					z-index: 100;
+					box-shadow: 0px 0px 40px rgba(0,0,0,0.25);
+					top: 40px;
+
+				ul
+					margin: 2% 0;
+					padding: 0
+					li
+						text-align: left;
+						position: relative;
+						float: none;
+						font-size: 14px;
+						width: 90%;
+						margin: 0;
+						padding: 4% 0 4% 10%;
+						height: auto;
+						&.divider
+							pointer-events: none;
+							padding: 0;
+							border-bottom: 1px solid #CCCCCC;
+							width: 88%;
+							margin: 2% 0 2% 6%;
+						&:hover 
+							background: #424242
+							border: 0
+							border-radius: 0
+							color: white
+							a
+								color: white
+							.bubble-sub
+								@extend .animate-open
+								a
+									color: #3E3E3E;
+
+						a
+							color: #3E3E3E;
+							text-decoration: none;
+							font-family: sans-serif;
+							font-weight: 600;
+							letter-spacing: 0.1px;
+						i 
+							margin-right: 10px;
+						.caret 
+							float: right;
+						.bubble-sub
+							@extend .notif-box
+							@extend .animate-closed
+							position: absolute;
+							width: 100%;
+							right: -100%;
+							top: -9px;
+							padding: 5px 0 5px 0;
+							li:hover
+								a
+									color: white
