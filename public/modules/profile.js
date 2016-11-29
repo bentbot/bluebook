@@ -4,6 +4,11 @@ $(function() {
 		$('.cover-uploader').trigger('click');
 	});
 
+	$('.add-friend').click(function (e) {
+		var id = $(this).data('friend'); 
+		socket.emit('addfriend', id);
+	});
+
 	$('.cover-uploader').on('change', function (e) {
 		var formData = new FormData();
 		formData.append("cover", $(this)[0].files[0]);

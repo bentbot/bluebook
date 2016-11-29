@@ -89,6 +89,7 @@ var views 	= path.join( __dirname, '/views'),
 
 app.get('/', function(req, res) {
 	profile.init(vars, req, function (err, data) {
+		vars = data;
 		if (data.user) { 
 			// Get the first ten posts for a user
 			feed.user(data.user, 10, 0, function (err, posts) {
@@ -111,6 +112,7 @@ app.get('/', function(req, res) {
 
 app.get('/u/:codename', function (req, res) {
 	profile.init(vars, req, function (err, data) {
+		vars = data;
 		profile.view(req.params.codename, data, function (err, view) {
 			if (err) data.error = err;
 			if (view) data.view = view.profile;
@@ -121,6 +123,7 @@ app.get('/u/:codename', function (req, res) {
 
 	app.post('/u/cover', function (req, res) {
 		profile.init(vars, req, function (err, data) {
+			vars = data;
 			upload.cover( req, function (err, file) {
 				if (err) res.send(err)
 				res.send(file.name)
@@ -238,12 +241,22 @@ io.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('react', function (react) {
-		reaction.add(socket, react, function (err, result) {
-			if (err) throw (err);
-			// reaction.count( result );
-			// emitReaction(socket, result)
+	socket.on('addfriend', function (friend) {
+		friendships.add(vars.user, friend, function (err, request) {
+			console.log( friend, request );
 		});
+	});
+
+	socket.on('react', function (reaction) {
+		reaction.add(socket, reaction, function (err, result) {
+			if (err) throw (err);
+			reaction.count( result );
+			emitReaction(socket, result);
+		});
+	});
+
+	socket.on('add', function (friend) {
+
 	});
 
 

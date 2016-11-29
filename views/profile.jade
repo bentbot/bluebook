@@ -15,7 +15,7 @@ main.col-12
 		.profile-picture
 			img( src="/images/profiles/#{profile.picture}" )
 		if !profile.friend
-			.btn.add-friend + Add Friend
+			.btn.add-friend( data-friend="#{profile._id}" ) + Add Friend
 	.profile.wrap
 		.col-3
 			section
