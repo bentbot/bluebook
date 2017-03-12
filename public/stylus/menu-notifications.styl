@@ -6,48 +6,69 @@ ul.notification-list
 	overflow-y: auto;
 	overflow-x: hidden;
 	border-radius: 5px;
-	li.notif
+	li.notif, li.friend-notif
+		&::last-child
+			margin-bottom: 0 !important
 		color: #3e3e3e;
-		width: 100%;
-		padding: 10px;
-		margin: 0;
+		width: 100% !important;
+		padding: 5px 5px  !important;
+		margin: 0 !important;
 		min-height: 50px;
 		float: none;
 		border-bottom: 1px solid #E4E4E4;
 		overflow: hidden
 		.image 
-			height: 60px;
+			height: 50px;
 			float: left;
 			margin: 0 2px;
+			max-width: 25%;
 			img
 				height: 100%;
 				width: auto;
-		figure
-			margin: 0 0 0 50px;
-			.notice
-				color: black;
-				font-size: 16px;
-				font-weight: 600;
-				font-family: sans-serif;
-				text-align: left;
-				margin: 5px 0 0 5px;
-			.description
-				color: #000;
-				font-size: small;
-				font-weight: 500;
-				font-family: sans-serif;
-				text-align: left;
-				margin: 0px 0 0 5px;
-			.meta
-				font-size: x-small;
-				font-family: sans-serif;
-				margin: 0px 0 0 5px;
-				text-align: left;
+		.figure, time
+			float: left;
+		    display: inline-block;
+		    width: auto;
+		    padding: 0 10px;
+		    margin: 0 10px;
+		    font-family: sans-serif;
+		    font-weight: bold;
+		    font-size: 16px;
+		    color: #326af1;
+		.notice
+			color: black;
+			font-size: 16px;
+			font-weight: 600;
+			font-family: sans-serif;
+			text-align: left;
+			margin: 2px 5px 4px 5px;
+		.description
+			color: #000;
+			font-size: small;
+			font-weight: 500;
+			font-family: sans-serif;
+			text-align: left;
+			margin: 0px 0 2px 5px;
+		.meta
+			font-size: x-small;
+			font-family: sans-serif;
+			margin: 0px 0 0 5px;
+			text-align: left;
+		.confirm-friend
+			position: absolute;
+			top: 7px;
+			right: 25px;
+		.ignore
+			position: absolute;
+			bottom: 7px !important;
+			right: 25px;
+			background-color: #ececec;
+			color: #272727;
+			text-shadow: none !important;
+			border: 1px solid #c1c1c1 !important;
 	li.notif:hover
 		color: #3e3e3e
 		background: #F9F9F9;
 		border-radius: 0;
-		padding: 10px;
-		margin: 0;
 		border: 0;
 		border-bottom: 1px solid #E4E4E4;

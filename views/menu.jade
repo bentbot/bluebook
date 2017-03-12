@@ -1,12 +1,4 @@
-if !user
-	div.header.bb-top
-		main.wrap 
-			a.title( href="/" ) #{name}
-			.search
-				input( id="search" placeholder="Search" )
-			.notifications
-				include login.jade
-else
+if user
 	div.header.bb-top
 		.main 
 			a.title( href="/" ) #{name}
@@ -14,8 +6,17 @@ else
 				input( id="search" placeholder="Search" )
 			.notifications
 				li( class="fa fa-child friends" )
+					include menu-friends.jade
 				li( class="fa fa-comments-o chat" )
 				li( class="fa fa-globe globe" )
 					include menu-notifications.jade
 				li( class="fa fa-cog settings")
 					include menu-settings.jade
+else
+	div.header.bb-top
+		main.wrap 
+			a.title( href="/" ) #{name}
+			.search
+				input( id="search" placeholder="Search" )
+			.notifications
+				include login.jade

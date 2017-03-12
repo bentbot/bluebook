@@ -39,16 +39,16 @@ var vars = {
 	name: 'Bb',
 	title: 'Bluebook',
 	app: package,
-	port: 8000
+	port: 8080
 }
 
 // MongoDB
-mongoose.connect('mongodb://book:book@localhost/book');
+mongoose.connect('mongodb://book:book@192.168.0.101:27017/book');
 
 // Setup middlewares
 feed.the(models, reaction); 
 friendships.the(models, profile);
-profile.the(models, feed);
+profile.the(models, feed, friendships);
 reaction.the(models);
 upload.the(formidable, models, profile);
 
@@ -89,20 +89,39 @@ var views 	= path.join( __dirname, '/views'),
 
 app.get('/', function(req, res) {
 	profile.init(vars, req, function (err, data) {
-		vars = data;
-		if (data.user) { 
+		if (err) {
+			res.clearCookie('user');
+			res.render('welcome', vars);
+			console.log(vars.users);
+		} else if (data.user) { 
+			vars = data;
 			// Get the first ten posts for a user
 			feed.user(data.user, 10, 0, function (err, posts) {
 				if (err) vars.error = err;
 				data.posts = posts;
 				res.render('index', data);
 			});
-		} else {
-			res.clearCookie('user');
-			res.render('welcome', vars);
 		}
 	});
 });
+
+app.get('/react', function(req, res) {
+	profile.init(vars, req, function (err, data) {
+		if (err) {
+			res.clearCookie('user');
+			res.send('welcome', vars);
+		} else if (data.user) { 
+			vars = data;
+			// Get the first ten posts for a user
+			feed.user(data.user, 10, 0, function (err, posts) {
+				if (err) vars.error = err;
+				data.posts = posts;
+				res.render('react', data);
+			});
+		}
+	});
+});
+
 
 
 
@@ -173,6 +192,7 @@ app.post('/login', function(req, res) {
 		});
 
 	} else {
+
 		if (!email) {
 			loginError.push({
 				code:  400,
@@ -219,20 +239,18 @@ app.post('/api/signup', function(req, res) {
 // Socket.io
 io.on('connection', function (socket) {
 
-	socket.on('signup', function (data) {
+	socket.on('signup', function (signup) {
 		
-		profile.create(data, function (err, user) {
-			if (err) {
-				console.log(err);
-			} else if (user) {
-				user.password = null;
-				var cookie = btoa(user._id);
-				var result = { profile: user, cookie: cookie };
-				socket.emit('signup', result);	
-			}
+		profile.create(signup, function (err, result) {
 			
-		})
-	})
+			var user = { err: [], data: [] };
+			if ( result ) user.data = result;
+			if ( err ) user.err.push(err);
+			
+			socket.emit('signup', user);
+		});
+			
+	});
 
 	socket.on('post', function (post) {
 		feed.add(socket, post, function (err, results) {
@@ -243,6 +261,7 @@ io.on('connection', function (socket) {
 
 	socket.on('addfriend', function (friend) {
 		friendships.add(vars.user, friend, function (err, request) {
+			if (err) throw (err);
 			console.log( friend, request );
 		});
 	});
@@ -255,8 +274,12 @@ io.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('add', function (friend) {
-
+	socket.on('friend-responce', function (data) {
+		console.log(vars.user, data);
+		friendships.responce(vars.user, data.friend, data.responce, function(err, result) {
+			if (err) throw (err);
+			socket.emit('friend-responce', result);
+		});
 	});
 
 

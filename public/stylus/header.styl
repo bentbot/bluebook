@@ -26,14 +26,11 @@
 			padding: 8px 3px
 		}
 	.search
-		display: none;
 		float: left;
 		width: 40%;
 		height: 35px;
 		margin: 6px 8px;
 		input
-			display: none
-			opacity: 0
 			height: 100%
 			width: 100%
 			outline: none
@@ -47,7 +44,7 @@
 		width: 50%
 		margin: 6px	
 		height: 35px	
-		text-align: right	
+		text-align: right
 		li
 			&.login
 				float: right;
@@ -74,8 +71,17 @@
 			display: inline-block;
 			text-align: center
 			height: auto
-			&:hover 
-				color: #fff;
+			.counter 
+				border-radius: 2px;
+				background: rgb(255, 3, 88);
+				position: absolute;
+				top: 0;
+				right: -3px;
+				font-size: 11px;
+				padding: 1px 3px 1px 2px;
+				color: white;
+				font-family: 'arial';
+				font-weight: 600;
 			.bubble 
 				&.active
 					display: block;
@@ -99,6 +105,7 @@
 						text-align: left;
 						position: relative;
 						float: none;
+						display: block;
 						font-size: 14px;
 						width: 90%;
 						margin: 0;

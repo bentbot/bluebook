@@ -1,0 +1,15 @@
+if requests.count > 0
+	.counter #{requests.count}
+	.bubble
+		ul.notification-list
+			each req in requests.list
+				li.notif( data-id="#{req.request.id}")
+					div.image
+						img( src="/images/profiles/#{req.friend.picture}" class="notification-image" )
+					.figure
+						div.notice 
+							a( href="/u/#{req.friend.codename}" ) #{req.friend.alias}
+						div.description #{req.friend.alias} wants to connect.
+						time.meta.timeago( datetime="#{req.request.date}" ) #{req.request.date}
+						.button.xtra-small.confirm-friend( data-id="#{req.friend.id}" ) Add Friend
+						.button.xtra-small.ignore( data-id="#{req.friend.id}" )  Ignore

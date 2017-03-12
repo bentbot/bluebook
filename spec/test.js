@@ -12,7 +12,7 @@ var assert = require('assert'),
    };
 
 
- webdriverio
+webdriverio
     .remote(options)
     .init()
     .url('http://www.google.com')
