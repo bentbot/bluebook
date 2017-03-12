@@ -12,7 +12,6 @@ $(function() {
 		$(this).children('.bubble').toggleClass('active')
 	});
 
-
 	$('.confirm-friend').on('click', function(e){ 
 		var friend = $(this).data('id');
 		socket.emit('friend-responce', { friend: friend, responce: 'friends' });
@@ -21,6 +20,25 @@ $(function() {
 	$('.ignore').on('click', function(e) { 
 		var friend = $(this).data('id');
 		socket.emit('friend-responce', { friend: friend, responce: 'ignored' });
+	});
+
+	$('#search').on('keyup', function(e) {
+		var query = $(this).val();
+		socket.emit('search', query);
+		socket.on('searchResponce', function(responce) {
+			$('.searchResults').html('').show();
+			for (var i = responce.length - 1; i >= 0; i--) {
+				console.log(responce[i]);
+				var html = "<li class='searchResult'>"+
+						"<a class='name' href='/u/"+responce[i].codename+"'>"+
+						"<div class='image'>"+
+						"<img src='/images/profiles/"+responce[i].picture+"' />"+
+						"</div>"+
+						"<div class='name'> "+responce[i].firstname+" "+responce[i].lastname+"</div>"+
+						"<div class='occupation'> "+responce[i].email+"</div>";
+				$('.searchResults').append(html);
+			};
+		});
 	});
 
 	// Update Feed

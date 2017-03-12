@@ -4,6 +4,7 @@ if user
 			a.title( href="/" ) #{name}
 			.search
 				input( id="search" placeholder="Search" )
+				ul.box.searchResults
 			.notifications
 				li( class="fa fa-child friends" )
 					include menu-friends.jade
@@ -16,7 +17,5 @@ else
 	div.header.bb-top
 		main.wrap 
 			a.title( href="/" ) #{name}
-			.search
-				input( id="search" placeholder="Search" )
 			.notifications
 				include login.jade

@@ -299,6 +299,34 @@ article .actions div span {
   padding: 0 10px;
   font-size: 16px;
 }
+.header .search .searchResults {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: 20px;
+  border-radius: 0 0 3px 3px;
+  width: 383px;
+}
+.header .search .searchResults li {
+  height: 55px;
+  list-style: none;
+}
+.header .search .searchResults .image {
+  width: 50px;
+  float: left;
+  margin-right: 10px;
+}
+.header .search .searchResults .image img {
+  width: 50px;
+}
+.header .search .searchResults .name {
+  font-family: sans-serif;
+}
+.header .search .searchResults .occupation {
+  color: #000;
+  font-family: sans-serif;
+  font-size: 13px;
+}
 .header .notifications {
   float: right;
   width: 50%;

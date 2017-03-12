@@ -32,6 +32,7 @@ var feed = require('./lib/feed'),
 	models = require('./lib/model'),
 	friendships = require('./lib/friends'),
 	reaction = require('./lib/reactions'),
+	search = require('./lib/search'),
 	profile = require('./lib/profiles'),
 	upload = require('./lib/upload');
 
@@ -49,6 +50,7 @@ mongoose.connect('mongodb://book:book@192.168.0.101:27017/book');
 feed.the(models, reaction); 
 friendships.the(models, profile);
 profile.the(models, feed, friendships);
+search.the(models, profile);
 reaction.the(models);
 upload.the(formidable, models, profile);
 
@@ -216,6 +218,13 @@ app.post('/login', function(req, res) {
 
 });
 
+/**
+ * Search API
+**/
+app.post('/search', function(req, res) {
+	res.send(req.body.q);	
+});
+
 
 // The user should be able to logout
 app.get('/logout', function(req, res) {
@@ -250,6 +259,12 @@ io.on('connection', function (socket) {
 			socket.emit('signup', user);
 		});
 			
+	});
+
+	socket.on('search', function (query) {
+		search.globalSearch(query, function(err, responce) {
+			socket.emit('searchResponce', responce);	
+		});
 	});
 
 	socket.on('post', function (post) {
