@@ -2,20 +2,25 @@ include header.jade
 include menu.jade
 main.col-12
 	.cover.wrap
-		if profile.cover
-			.cover-background( style="background-image: url('/images/covers/#{profile.cover}');")
-		if user
+		if view.profile.cover
+			.cover-background( style="background-image: url('/images/covers/#{view.profile.cover}');")
+		if view.self
 			form.cover-form( action="/u/cover" method="POST" )
 				.hidden.progress-indicator
 				input.cover-uploader( type="file" )
 				.btn.upload-cover
 					.floater.hidden Update Background Image
 					i.fa.fa-pencil
-		h1.alias #{profile.alias}
+		h1.alias #{view.profile.alias}
 		.profile-picture
-			img( src="/images/profiles/#{profile.picture}" )
-		if !profile.friend
-			.btn.add-friend( data-friend="#{profile._id}" ) + Add Friend
+			img( src="/images/profiles/#{view.profile.picture}" )
+		if !view.self
+			if !view.friend
+				.btn.add-friend( data-friend="#{view.profile._id}" ) + Add Friend
+			if view.friend
+				.btn.true-friends( data-friend="#{view.profile._id}" ) 
+					i.fa.fa-check
+					span Friends
 	.profile.wrap
 		.col-3
 			section

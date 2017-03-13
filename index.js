@@ -93,8 +93,9 @@ app.get('/', function(req, res) {
 	profile.init(vars, req, function (err, data) {
 		if (err) {
 			res.clearCookie('user');
+			console.log(vars)
+			vars.user = null;
 			res.render('welcome', vars);
-			console.log(vars.users);
 		} else if (data.user) { 
 			vars = data;
 			// Get the first ten posts for a user
@@ -133,10 +134,10 @@ app.get('/react', function(req, res) {
 
 app.get('/u/:codename', function (req, res) {
 	profile.init(vars, req, function (err, data) {
-		vars = data;
 		profile.view(req.params.codename, data, function (err, view) {
 			if (err) data.error = err;
-			if (view) data.view = view.profile;
+			if (view) data.view = view;
+			if ( data.view.profile.id == data.profile.id ) data.view.self = true;
 			res.render('profile', data);
 		});
 	});
@@ -185,6 +186,8 @@ app.post('/login', function(req, res) {
 	if ( password && email ) {
 
 		profile.login( email, password, function (err, result) {
+			if (err) throw (err);
+			console.log(result);
 			var login = { errors: [], results: [] };
 			if ( result ) login.results = result;
 			if ( err ) login.errors.push(err);
@@ -228,8 +231,11 @@ app.post('/search', function(req, res) {
 
 // The user should be able to logout
 app.get('/logout', function(req, res) {
-	res.clearCookie('user');
-	res.redirect('/');
+	profile.logout( req.cookies.user, function (err, results) {
+		if (err) throw (err);
+		res.clearCookie('user');
+		res.redirect('/');
+	});
 });
 
 
